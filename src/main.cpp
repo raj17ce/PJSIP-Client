@@ -49,17 +49,17 @@ int main() {
     pj_thread_sleep(3000);
 
     //Setting Capture device formate
-    VidDevManager &vid_mgr = Endpoint::instance().vidDevManager();
-    MediaFormatVideo format;
+    // VidDevManager &vid_mgr = Endpoint::instance().vidDevManager();
+    // MediaFormatVideo format;
 
-    // Set the desired resolution (1280x720) and frame rate (30 FPS)
-    format.width = 1280;
-    format.height = 720;
-    format.fpsNum = 30;
-    format.fpsDenum = 1;
+    // // Set the desired resolution (1280x720) and frame rate (30 FPS)
+    // format.width = 1280;
+    // format.height = 720;
+    // format.fpsNum = 30;
+    // format.fpsDenum = 1;
 
-    // Apply the format to the video device (0 is the default device)
-    vid_mgr.setFormat(1, format, PJ_TRUE);
+    // // Apply the format to the video device (0 is the default device)
+    // vid_mgr.setFormat(1, format, PJ_TRUE);
 
     //Making Call
     std::string dest_uri{"sip:202@192.168.1.200"};
