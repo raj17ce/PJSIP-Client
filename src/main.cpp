@@ -88,6 +88,8 @@ int main() {
         std::cout << err.info() << std::endl;
     }
 
+    pj_thread_sleep(8000);
+
     VideoMedia vid_enc_med1 = call1->getEncodingVideoMedia(-1);
     VideoMedia vid_dec_med1 = call1->getDecodingVideoMedia(-1);
 
@@ -97,7 +99,13 @@ int main() {
     vid_dec_med1.startTransmit(vid_enc_med2, VideoMediaTransmitParam{});
     vid_dec_med2.startTransmit(vid_enc_med1, VideoMediaTransmitParam{});
 
-    //MyVideo::listVideoDevices();
+    AudioMedia aud_med1 = call1->getAudioMedia(-1);
+    AudioMedia aud_med2 = call2->getAudioMedia(-1);
+
+    aud_med1.startTransmit(aud_med2);
+    aud_med2.startTransmit(aud_med1);
+
+    // MyVideo::listVideoDevices();
 
     // End-Delay
     pj_thread_sleep(1000000);
