@@ -62,8 +62,8 @@ int main() {
     // vid_mgr.setFormat(1, format, PJ_TRUE);
 
     //Making Call
-    std::string dest_uri{"sip:202@192.168.1.200"};
-    Call *call = new MyCall(*acc);
+    std::string dest_uri{"sip:201@192.168.1.200"};
+    Call *call1 = new MyCall(*acc);
     CallOpParam prm(true);  // Use default call settings
 
     // Enabling Video and Audio for Call
@@ -71,10 +71,31 @@ int main() {
     prm.opt.videoCount = 1;
 
     try {
-        call->makeCall(dest_uri, prm);
+        call1->makeCall(dest_uri, prm);
     } catch (Error &err) {
         std::cout << err.info() << std::endl;
     }
+
+    // 3 Sec Delay
+    pj_thread_sleep(3000);
+
+    dest_uri = "sip:202@192.168.1.200";
+    Call *call2 = new MyCall(*acc);
+
+    try {
+        call2->makeCall(dest_uri, prm);
+    } catch (Error &err) {
+        std::cout << err.info() << std::endl;
+    }
+
+    VideoMedia vid_enc_med1 = call1->getEncodingVideoMedia(-1);
+    VideoMedia vid_dec_med1 = call1->getDecodingVideoMedia(-1);
+
+    VideoMedia vid_enc_med2 = call2->getEncodingVideoMedia(-1);
+    VideoMedia vid_dec_med2 = call2->getDecodingVideoMedia(-1);
+
+    vid_dec_med1.startTransmit(vid_enc_med2, VideoMediaTransmitParam{});
+    vid_dec_med2.startTransmit(vid_enc_med1, VideoMediaTransmitParam{});
 
     //MyVideo::listVideoDevices();
 
