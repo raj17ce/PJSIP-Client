@@ -30,9 +30,9 @@ int main() {
 
     // Configure an AccountConfig
     AccountConfig acfg;
-    acfg.idUri = "sip:203@192.168.1.200";
+    acfg.idUri = "sip:102@192.168.1.200";
     acfg.regConfig.registrarUri = "sip:192.168.1.200";
-    AuthCredInfo cred{"digest", "*", "203", 0, "203"};
+    AuthCredInfo cred{"digest", "*", "102", 0, "102"};
     acfg.sipConfig.authCreds.push_back(cred);
 
     // Default Device Setup & Call Media Setup
@@ -62,7 +62,7 @@ int main() {
     // vid_mgr.setFormat(1, format, PJ_TRUE);
 
     //Making Call
-    std::string dest_uri{"sip:201@192.168.1.200"};
+    std::string dest_uri{"sip:101@192.168.1.200"};
     Call *call1 = new MyCall(*acc);
     CallOpParam prm(true);  // Use default call settings
 
@@ -79,7 +79,7 @@ int main() {
     // 3 Sec Delay
     pj_thread_sleep(3000);
 
-    dest_uri = "sip:202@192.168.1.200";
+    dest_uri = "sip:103@192.168.1.200";
     Call *call2 = new MyCall(*acc);
 
     try {
@@ -88,7 +88,7 @@ int main() {
         std::cout << err.info() << std::endl;
     }
 
-    pj_thread_sleep(8000);
+    pj_thread_sleep(10000);
 
     VideoMedia vid_enc_med1 = call1->getEncodingVideoMedia(-1);
     VideoMedia vid_dec_med1 = call1->getDecodingVideoMedia(-1);
@@ -96,7 +96,7 @@ int main() {
     VideoMedia vid_enc_med2 = call2->getEncodingVideoMedia(-1);
     VideoMedia vid_dec_med2 = call2->getDecodingVideoMedia(-1);
 
-    vid_dec_med1.startTransmit(vid_enc_med2, VideoMediaTransmitParam{});
+    //vid_dec_med1.startTransmit(vid_enc_med2, VideoMediaTransmitParam{});
     vid_dec_med2.startTransmit(vid_enc_med1, VideoMediaTransmitParam{});
 
     AudioMedia aud_med1 = call1->getAudioMedia(-1);
