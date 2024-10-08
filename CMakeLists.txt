@@ -13,5 +13,9 @@ set(CMAKE_BUILD_TYPE Debug)
 add_subdirectory(src)
 
 add_executable(${MY_Project_Name} ${SOURCES})
+add_executable(ReadVideoStream src/ReadVideoStream.cpp)
+add_executable(StreamAudio src/StreamAudio.cpp)
 
 target_link_libraries(${MY_Project_Name} PUBLIC SOURCE)
+target_link_libraries(ReadVideoStream PUBLIC SOURCE)
+target_link_libraries(StreamAudio PUBLIC SOURCE)
